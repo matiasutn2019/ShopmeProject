@@ -21,7 +21,7 @@ API de pago y envío de PayPal para integrar compras
 
 JUnit, Spring Test, AssertJ y Mockito para pruebas integradas
 
-Desarrolle de la aplicación en la nube de Heroku y carga del archivo en Amazon S3
+Desarrollo de la aplicación en la nube de Heroku y carga del archivo en Amazon S3
 
 Spring OAuth para el inicio de sesión único con Facebook y Google
 
