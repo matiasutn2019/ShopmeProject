@@ -30,3 +30,7 @@ aShopmeWebParent/ShopmeBackEnd/src/main/java/com/shopme/admin/user/repository/IU
 ZShopmeWebParent/ShopmeBackEnd/src/test/java/com/shopme/admin/user/RoleRepositoryTests.java,b\1\b1ea8f05783539f9080da35eec8378d60058a271
 m
 =ShopmeCommon/src/main/java/com/shopme/common/entity/Role.java,1\c\1c6673dd93f2560c646d63ac26bc77db2cdf534e
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+Š
+ZShopmeWebParent/ShopmeBackEnd/src/main/java/com/shopme/admin/ShopmeBackEndApplication.java,a\0\a0a078a1549e838333e88733dd74a3f720ca944a
