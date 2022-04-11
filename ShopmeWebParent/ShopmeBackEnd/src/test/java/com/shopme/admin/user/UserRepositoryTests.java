@@ -1,6 +1,7 @@
 package com.shopme.admin.user;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.shopme.admin.user.repository.IUserRepository;
 import com.shopme.common.entity.Role;
@@ -61,5 +62,19 @@ public class UserRepositoryTests {
         User user4 = userRepository.findById(7).get();
         user4.setEnabled(true);
         userRepository.save(user4);
+    }
+
+    @Test
+    public void getUserByEmailNull() {
+        String email = "abc@def.com";
+        User user = userRepository.getUserByEmail(email);
+        assertThat(user).isNull();
+    }
+
+    @Test
+    public void getUserByEmailNotNull() {
+        String email = "john@gmail.com";
+        User user = userRepository.getUserByEmail(email);
+        assertThat(user).isNotNull();
     }
 }
