@@ -1,10 +1,12 @@
 package com.shopme.admin.user.service;
 
+import com.shopme.admin.user.exceptions.UserNotFoundException;
 import com.shopme.admin.user.repository.IRoleRepository;
 import com.shopme.admin.user.repository.IUserRepository;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,17 @@ public class UserService {
     }
 
     public void save(User user) {
-        encodePassword(user);
+        boolean isUpdating = (user.getId() != null);
+        if (isUpdating) {
+            User existingUser = userRepository.findById(user.getId()).get();
+            if (user.getPassword().isEmpty()) {
+                user.setPassword(existingUser.getPassword());
+            } else {
+                encodePassword(user);
+            }
+        } else {
+            encodePassword(user);
+        }
         userRepository.save(user);
     }
 
@@ -39,8 +51,26 @@ public class UserService {
         user.setPassword(encodedPassword);
     }
 
-    public boolean isEmailUnique(String email) {
+    public boolean isEmailUnique(Integer id, String email) {
         User user = userRepository.getUserByEmail(email);
-        return user == null;
+        if (user == null) return true;
+        boolean isNew = (id == null);
+        if (isNew) {
+            if (user != null) return false;
+        } else {
+            if (user.getId() != id) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public User get(Integer id) throws UserNotFoundException {
+        try {
+            return userRepository.findById(id).get();
+        } catch (NoSuchElementException e) {
+            throw new UserNotFoundException("Could not find any user with ID " + id);
+        }
+
     }
 }
